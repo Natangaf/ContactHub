@@ -1,229 +1,70 @@
-import styled from "styled-components";
-import { Link as LinkRouter } from "react-router-dom";
+import { styled } from "styled-components";
 
-export const Div = styled.div`
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-
-  h1 {
-    font-family: "Inter", sans-serif;
-  }
-
-  @media (max-width: 700px) {
-    flex-direction: column;
-    gap: 1rem;
-  }
-`;
-
-export const Link = styled(LinkRouter)`
-  width: 100%;
-  height: 3.75rem;
-
-  background: var(--color-grey-1);
-  border-radius: 8px;
-
-  font-family: "Inter", sans-serif;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 1rem;
-  line-height: 1.75rem;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  margin-top: 1.25rem;
-
-  color: var(--color-grey-3);
-  &:hover {
-    color: var(--color-grey-1);
-    background-color: var(--color-grey-3);
-    border: 0.0625rem solid var(--color-grey-dark);
-    transition: 0.5s ease;
-  }
-  @media (max-width: 700px) {
-    height: 2.1875rem;
-  }
-`;
-
-export const DivForm = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 500px;
-  color: var(--color-grey-4);
-  font-family: "Inter", sans-serif;
-  background: var(--color-white);
-
-  border: 2px solid var(--color-grey-1);
-  border-radius: 5px;
-  padding: 33px 24px 28px 24px;
-  .relative {
-    position: relative;
-    margin-bottom: 0;
-  }
-  .schemaText {
-    color: var(--color-grey-4);
-    font-family: "Inter", sans-serif;
-  }
-
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  div {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    margin-bottom: 20px;
-
-    font-family: "Inter", sans-serif;
-  }
-
-  h1 {
-    font-family: "Inter", sans-serif;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 18px;
-    line-height: 24px;
-    /* or 133% */
-
-    color: var(--color-grey-dark);
-  }
-
-  label {
-    width: 40px;
-    height: 15px;
-
-    font-family: "Inter", sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 15px;
-
-    background-color: var(--color-white);
-
-    color: #121214;
-    margin-left: 2.5rem;
-    bottom: 3.1875rem;
-    text-align: center;
-  }
-
-  input {
-    background: var(--color-white);
-    border: 0.125rem solid #121214;
-    border-radius: 0.5rem;
-    height: 3.75rem;
-    width: 100%;
-    padding-left: 0.9375rem;
-    margin-top: 0.9375rem;
-  }
-
-  .passwordDiv {
-    position: relative;
-    flex-direction: column;
-    width: 100%;
-    margin-bottom: 0;
-  }
-  .emailDiv {
-    position: relative;
-    flex-direction: column;
-    margin-bottom: 0;
-  }
-
-  button {
-    padding: 0rem 2.5rem;
-    gap: 0.625rem;
-
-    height: 3.75rem;
-    margin-top: 0.9375rem;
-
-    background: #121214;
-    border-radius: 0.5rem;
-    border: transparent;
-    color: #f8f9fa;
-
-    font-family: "Inter", sans-serif;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 1rem;
-    line-height: 1.75rem;
-
-    text-align: center;
-
-    &:hover {
-      color: var(--color-grey-1);
-      background-color: var(--color-grey-3);
-      border: 0.0625rem solid var(--color-grey-dark);
-      transition: 0.5s ease;
+export const StyleLogin = styled.main`
+    .container{
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
     }
-  }
-
-  .btnLogin {
-    height: 60px;
-    background: var(--color-main-2);
-    border-radius: 8px;
-    font-family: "Inter", sans-serif;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 28px;
-
-    text-align: center;
-
-    color: var(--color-white);
-    &:hover {
-      color: var(--color-main);
-      background-color: var(--color-white);
-      border: 1px solid var(--color-main);
-      transition: 0.5s ease;
+    section{
+        width: 100%;
+        height: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
-  }
-  #confirmation {
-    margin-top: 0;
-  }
-
-  .divText {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 0;
-  }
-  .p {
-    margin-top: 1.25rem;
-    width: 20.4375rem;
-    font-family: "Inter", sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 1.125rem;
-
-    text-align: center;
-
-    color: var(--color-grey-4);
-  }
-  @media (max-width: 700px) {
-    width: 90%;
-    input {
-      height: 2.1875rem;
+    img{
+        width: 100%;
+        height: auto;
     }
-    label {
-      bottom: 1.6875rem;
+    form{
+        width: 90%;
+        height: 70%; 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        gap:5px;
+        background-color: var(--color-gray-1);
+        border-radius:5px 5px 0 0 ;
     }
-
-    button {
-      height: 2.1875rem;
+    .signUp{
+        width: 90%;
+        height: 20%;
+        display: flex;
+        gap:5px;
+        background: var(--color-gray-2);
+        color: var(--color-Second);
+        align-items: center;
+        justify-content: center;
+        border-radius:0 0 5px 5px ;
     }
-    .btnLogin {
-      height: 2.1875rem;
+    a{
+        color: var(--color-Primary);
     }
-    .headerDiv {
-      display: flex;
-      flex-direction: column;
+    @media(min-width:600px){
+        section{
+            width: 100%;
+            height: 40%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        form{
+            justify-content: center;
+        }
     }
-  }
-`;
+    @media(min-width:1000px){
+        .container{
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+        }
+        img{
+            width: 40%;
+        }
+        form{
+            height: 80%;
+        }
+    }
+`

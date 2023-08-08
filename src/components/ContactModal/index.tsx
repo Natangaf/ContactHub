@@ -1,21 +1,24 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useContact } from "../../hooks/useContact";
 import { BackGround, DivModal } from "./styles";
-import { ContactData, contactSchema } from "../DashBoardMain/Validator";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useRef } from "react";
 import { useOutClick } from "../../hooks/useOutclick";
+import { contactSchema, TContactData } from "../../schemas";
+import { zodResolver } from '@hookform/resolvers/zod';
 
 export const ContactModal = () => {
   const { setOpenModal } = useContact();
   const { postContact } = useContact();
-  const { register, handleSubmit } = useForm<ContactData>({
-    resolver: zodResolver(contactSchema),
+  const {
+    register,
+    handleSubmit } = useForm<TContactData>({
+    resolver
+    : zodResolver(contactSchema),
   });
-  const submit: SubmitHandler<ContactData> = async (data) => {
+  const submit: SubmitHandler<TContactData> = async (data) => {
     postContact(data);
   };
-  const clickRef = useOutClick(() => setOpenModal(false), 2);
+  const clickRef = useOutClick(() => setOpenModal(false));
   const divRef = useRef(null);
   return (
     <BackGround ref={clickRef}>

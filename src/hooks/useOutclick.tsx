@@ -1,31 +1,27 @@
-import React from "react";
-import { useRef, useEffect } from "react";
+import { useEffect, useRef } from "react"
 
-export const useOutClick = (callback: () => void, parametro: 1 | 2) => {
-  const ref = useRef(null);
+export const useOutClick = (callback: any) => {
+  const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    function modalOutClick(event: { target: any }) {
-      const target = event.target;
-      const element = ref.current;
+    function modalOutClick(e: MouseEvent) {
+      const target = e.target as HTMLDivElement
+      const element = ref.current
 
-      if (parametro == 1) {
-        if (target.name != "password") {
-          callback();
-        }
+      if (!element) {
+        return null
       }
-      if (parametro == 2) {
-        if (target.tagName == "SECTION") {
-          callback();
-        }
+
+      if (!element.contains(target)) {
+        callback()
       }
     }
-
-    window.addEventListener("mousedown", modalOutClick);
+    window.addEventListener("mousedown", modalOutClick)
 
     return () => {
-      window.removeEventListener("mousedown", modalOutClick);
-    };
-  }, []);
-  return ref;
-};
+      window.removeEventListener("mousedown", modalOutClick)
+    }
+  }, [])
+
+  return ref
+}

@@ -1,38 +1,43 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-import { LoginData, schema } from "./validator";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { Link } from 'react-router-dom';
+import { AiOutlineMail } from "react-icons/ai"
+import { MdPassword } from "react-icons/md"
 import { useAuth } from "../../hooks/useAuth";
-import { Div, DivForm, Link } from "./styles";
+import { StyleLogin } from './styles';
+import ContactHub from "../../assets/ContactHubtranparent.png"
+import { Inputs } from "../../components/Inputs";
+import { StyledButtons } from './../../styles/Buttons';
+import { formSchemaLogin, TFormSchemaLogin } from "../../schemas";
+import { zodResolver } from '@hookform/resolvers/zod';
 
 export const Login = () => {
   const { signIn } = useAuth();
-  const { register, handleSubmit } = useForm<LoginData>({
-    resolver: zodResolver(schema),
+  const {
+    register,
+    handleSubmit
+  } = useForm<TFormSchemaLogin>({
+    resolver:  zodResolver(formSchemaLogin),
   });
-  const submit: SubmitHandler<LoginData> = async (data) => {
+  const submit: SubmitHandler<TFormSchemaLogin> = async (data) => {
     signIn(data);
   };
 
   return (
-    <Div>
-      <h1>Contact Flow</h1>
-      <DivForm>
-        <form onSubmit={handleSubmit(submit)}>
-          <div className="emailDiv">
-            <label htmlFor="email">Email</label>
-            <input type="email" id="email" {...register("email")} />
+    <StyleLogin>
+      <div className="container">
+        <img src={ContactHub} alt="" />
+        <section>
+          <form onSubmit={handleSubmit(submit)}>
+            <Inputs name="email" register={register("email")} Icons={AiOutlineMail} />
+            <Inputs name="password" register={register("password")} Icons={MdPassword} />
+            <StyledButtons nameButtons="buttonSend" type="submit">Login</StyledButtons>
+          </form>
+          <div className="signUp">
+            <p className="p">Don't have an account?</p>
+            <Link to="/signup">SignUp</Link>
           </div>
-          <div className="passwordDiv">
-            <label htmlFor="password">Password</label>
-            <input type="password" id="password" {...register("password")} />
-          </div>
-          <button type="submit">LogIn</button>
-        </form>
-        <div className="divText">
-          <p className="p">Don't have an account?</p>
-        </div>
-        <Link to="/signup">SignUp</Link>
-      </DivForm>
-    </Div>
+        </section>
+      </div>
+    </StyleLogin>
   );
 };

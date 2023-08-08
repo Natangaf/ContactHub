@@ -2,6 +2,10 @@ import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
    :root {
+    --color-Primary:#ffa31a;
+    --color-Second:#808080;
+    --color-gray-1:	#292929;
+    --color-gray-2:#1b1b1b;
     --color-blue-900: #0d47a1;
     --color-blue-800: #1565c0;
     --color-blue-700: #1976d2;
@@ -35,32 +39,11 @@ export default createGlobalStyle`
     --color-grey-btn: #bdbdbd;
     --color-grey-dark: #333333;
     --color-back-modal: rgba(0, 0, 0, 0.5);
+    --color-back: #111111;
 
     font-size: 60%;   
   }
-
-  /* font-size: 16px;
-  1rem = 10px
-  */
-
-  @media (min-width: 700px) {
-    :root {
-      font-size: 62.5%; // root font-size: 10px;
-    }
-  }
-  
-  * {
-    margin:0;
-    padding: 0;
-    outline:0;
-    box-sizing: border-box;
-    list-style: none;
-    text-decoration: none;
-    font-family: "Inter", sans-serif;
-}
-
-
-  
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;1,100;1,300&display=swap');
 
   body,html{
     width: 100vw;
@@ -68,15 +51,26 @@ export default createGlobalStyle`
   }
 
   body {
-    background: var(--color-gray-900);
-    color: var(--color-gray-300);
+    background: var(--color-back);
     -webkit-font-smoothing: antialiased;
-
     overflow-x: hidden;
   }
+    main{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .container{
+    height: 100vh;
+    max-width: 1200px;
+    display: flex;
+    margin:0 auto;
+  }
 
-  body, input, button, textarea {
-    font-family: 'Inter';
+  body, input, button, textarea ,label{
+    font-family: 'Roboto', sans-serif;
     font-size: 1.6rem;
   }
 
@@ -84,7 +78,4 @@ export default createGlobalStyle`
     font-weight: 500;
   }
 
-  button {
-    cursor: pointer;
-  }
 `;

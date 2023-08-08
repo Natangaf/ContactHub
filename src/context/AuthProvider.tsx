@@ -1,17 +1,26 @@
 import { createContext, useEffect, useState } from "react";
-import { LoginData } from "../pages/login/validator";
 import { api } from "../services/api";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/ReactToastify.css";
-import { TUserSchemaUpdate } from "../schemas";
+import { TFormSchemaLogin, TUserSchemaUpdate } from "../schemas";
 
+interface IUserRegister {
+  email: string;
+  password: string;
+  name: string;
+  phone: string;
+}
+interface LoginResponse {
+  token: string;
+  loggedUser: LoggedUser;
+}
 interface AuthProviderProps {
   children: React.ReactNode;
 }
 
 interface AuthContextValues {
-  signIn: (data: LoginData) => void;
+  signIn: (data: TFormSchemaLogin) => void;
   loading: boolean;
   user: LoggedUser;
   registerUser: (data: IUserRegister) => void;
@@ -25,30 +34,21 @@ interface LoggedUser {
   email: string;
   phone: string;
 }
-interface IUserRegister {
-  email: string;
-  password: string;
-  name: string;
-}
 
-interface LoginResponse {
-  token: string;
-  loggedUser: {
-    id: string;
-    name: string;
-    email: string;
-    phone: string;
-    createdAt: string;
-  };
-}
+const handleApiError = (error: any, messege?: string) => {
+  console.log(error);
+    if (error.response?.messege && error.status != 500) {
+      toast.error(error.response?.messege || messege);
+    } 
+};
 
 export const AuthContext = createContext({} as AuthContextValues);
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState({} as LoggedUser);
   const [loading, setLoading] = useState(true);
-  const location = useLocation();
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const token = localStorage.getItem("flow:token");
@@ -58,21 +58,21 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         return;
       }
       try {
-        const response = await api.get("/users");
+        const response  = await api.get("/users");
         setUser(response.data);
       } catch (error) {
-        console.log(error);
+        handleApiError(error);
       } finally {
         setLoading(false);
       }
     })();
   }, []);
 
-  const signIn = async (data: LoginData) => {
+  const signIn = async (data: TFormSchemaLogin) => {
     try {
-      const reponse = await api.post<LoginResponse>("/login", data);
+      const response = await api.post<LoginResponse>("/login", data);
 
-      const { token, loggedUser } = reponse.data;
+      const { token, loggedUser } = response.data;
 
       setUser(loggedUser);
       api.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -80,25 +80,23 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
       setLoading(false);
       const toNavigate = location.state?.from?.pathname || "/dashboard";
-      toast.success("Sucessfully logged!");
+      toast.success("Successfully logged in!");
 
       navigate(toNavigate, { replace: true });
-    } catch (error: any) {
-      console.log(error);
-      toast.error(error.response.data.message);
+    } catch (error) {
+      handleApiError(error, "Login failed");
     }
   };
 
   const registerUser = async (data: IUserRegister) => {
     try {
       await api.post("users", data);
-      toast.success("Sucessfully registered!");
+      toast.success("Successfully registered!");
       setTimeout(() => {
         navigate("/");
       }, 6000);
-    } catch (error: any) {
-      console.log(error);
-      toast.error(error.response.data.message);
+    } catch (error) {
+      handleApiError(error, "Registration failed");
     }
   };
 
@@ -107,23 +105,22 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       await api.delete("users");
       localStorage.clear();
       navigate("/", { replace: true });
-      toast.success("Account sucessfully deleted!");
-    } catch (error: any) {
-      console.log(error);
-      toast.error(error.response.data.message);
+      toast.success("Account successfully deleted!");
+    } catch (error) {
+      handleApiError(error, "Registration failed");
     }
   };
 
   const updateUser = async (data: TUserSchemaUpdate) => {
     try {
       const response = await api.patch("/users", data);
-      toast.success("Sucessfully updated!");
+      toast.success("Successfully updated!");
       setUser(response.data);
-    } catch (error: any) {
-      console.log(error);
-      toast.error(error.response.data);
+    } catch (error) {
+      handleApiError(error, "Update failed");
     }
   };
+
   return (
     <AuthContext.Provider
       value={{ signIn, loading, user, registerUser, deleteUser, updateUser }}

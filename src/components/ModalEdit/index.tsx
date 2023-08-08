@@ -1,27 +1,20 @@
 import { useForm } from "react-hook-form";
 import { BackGround, DivModal } from "./styles";
 import { ContactSchemaUpdate, TContactSchemaUpdate } from "../../schemas";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useOutClick } from "../../hooks/useOutclick";
 import { useRef } from "react";
 import { useContact } from "./../../hooks/useContact";
+import { zodResolver } from '@hookform/resolvers/zod';
+
 
 export const ModalEdit = () => {
-  const ContactName = localStorage.getItem("ContactName") || "";
-  const ContactEmail = localStorage.getItem("ContactEmail") || "";
-  const ContactPhone = localStorage.getItem("ContactPhone") || "";
-
-  const { register, handleSubmit } = useForm<TContactSchemaUpdate>({
+  
+  const { register, handleSubmit } = useForm<Partial<TContactSchemaUpdate>>({
     resolver: zodResolver(ContactSchemaUpdate),
-    defaultValues: {
-      name: ContactName,
-      email: ContactEmail,
-      phone: ContactPhone,
-    },
   });
   const { setOpenModalEdit } = useContact();
   const { deleteContact, updateContact } = useContact();
-  const clickRef = useOutClick(() => setOpenModalEdit(false), 2);
+  const clickRef = useOutClick(() => setOpenModalEdit(false));
   const divRef = useRef(null);
 
   return (

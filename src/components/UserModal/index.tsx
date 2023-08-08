@@ -2,12 +2,11 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { BackGround, DivModal } from "./styles";
 import { useContact } from "../../hooks/useContact";
 import { TUserSchemaUpdate } from "../../schemas";
-import { zodResolver } from "@hookform/resolvers/zod";
-
 import { UserSchemaUpdate } from "../../schemas/index";
 import { useAuth } from "../../hooks/useAuth";
 import { useOutClick } from "../../hooks/useOutclick";
 import { useRef } from "react";
+import { zodResolver } from '@hookform/resolvers/zod';
 
 const UserModal = () => {
   const { register, handleSubmit } = useForm<TUserSchemaUpdate>({
@@ -15,7 +14,7 @@ const UserModal = () => {
   });
   const { setOpenModalProfile } = useContact();
   const { deleteUser, updateUser } = useAuth();
-  const clickRef = useOutClick(() => setOpenModalProfile(false), 2);
+  const clickRef = useOutClick(() => setOpenModalProfile(false));
   const divRef = useRef(null);
   const onSubmit: SubmitHandler<TUserSchemaUpdate> = async (
     data: TUserSchemaUpdate

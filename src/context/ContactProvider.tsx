@@ -1,11 +1,9 @@
 import { Dispatch, createContext, useEffect, useState } from "react";
 import { Contact } from "../components/DashBoardMain";
 import { api } from "../services/api";
-import { ContactData } from "../components/DashBoardMain/Validator";
-import { TContactSchemaUpdate } from "../schemas";
+import { TContactData, TContactSchemaUpdate } from "../schemas";
 import { toast } from "react-toastify";
 import "react-toastify/ReactToastify.css";
-import { any } from "zod";
 
 interface ContactProviderProps {
   children: React.ReactNode;
@@ -13,7 +11,7 @@ interface ContactProviderProps {
 
 interface ContactContextValues {
   contacts: Contact[];
-  postContact: (data: ContactData) => Promise<void>;
+  postContact: (data: TContactData) => Promise<void>;
   updateContact: (data: TContactSchemaUpdate) => void;
   deleteContact: () => void;
   openModal: boolean;
@@ -55,7 +53,7 @@ export const ContactProvider = ({ children }: ContactProviderProps) => {
     }
   };
 
-  const postContact = async (data: ContactData) => {
+  const postContact = async (data: TContactData) => {
     try {
       await api.post("/contacts", data);
       reloadContacts();
