@@ -5,7 +5,6 @@ import { TUserSchemaUpdate } from "../../schemas";
 import { UserSchemaUpdate } from "../../schemas/index";
 import { useAuth } from "../../hooks/useAuth";
 import { useOutClick } from "../../hooks/useOutclick";
-import { useRef } from "react";
 import { zodResolver } from '@hookform/resolvers/zod';
 
 const UserModal = () => {
@@ -15,7 +14,6 @@ const UserModal = () => {
   const { setOpenModalProfile } = useContact();
   const { deleteUser, updateUser } = useAuth();
   const clickRef = useOutClick(() => setOpenModalProfile(false));
-  const divRef = useRef(null);
   const onSubmit: SubmitHandler<TUserSchemaUpdate> = async (
     data: TUserSchemaUpdate
   ) => {
@@ -37,8 +35,8 @@ const UserModal = () => {
   };
 
   return (
-    <BackGround ref={clickRef}>
-      <DivModal ref={divRef}>
+    <BackGround >
+      <DivModal ref={clickRef}>
         <div>
           <h1>Edit info</h1>
           <button
@@ -54,15 +52,15 @@ const UserModal = () => {
           <input type="email" id="email" {...register("email")} />
           <label htmlFor="phone">Phone</label>
           <input type="phone" id="phone" {...register("phone")} />
-          <section>
+          <div>
             <button className="btnSave" type="submit">
               Save
             </button>
-          </section>
+            <button className="btnDelete" type="button" onClick={deleteUser}>
+              Delete
+            </button>
+          </div>
         </form>
-        <button className="btnDelete" type="button" onClick={deleteUser}>
-          Delete
-        </button>
       </DivModal>
     </BackGround>
   );

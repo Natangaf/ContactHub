@@ -1,27 +1,24 @@
 import { styled } from "styled-components";
 
 export const DivModal = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  position: fixed;
-  width: 369px;
-  height: 342px;
-
-  background: #212529;
-  box-shadow: 0px 4px 40px -10px rgba(0, 0, 0, 0.25);
-  border-radius: 4px;
-  div {
     display: flex;
-
-    justify-content: space-between;
-    width: 100%;
-    height: 50px;
-    background: #343b41;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    width: 300px;
+    height: 60%;
+    background: var(--color-gray-1);
+    box-shadow: 0px 4px 40px -10px var(--color-back-modal);
+    border-radius: 4px;
+    justify-content: center;
+  .containerheaderContactModal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 90%;
+    height: 80%;
+    background: var(--color-gray-1);
     border-radius: 4px 4px 0px 0px;
-    padding: 12px 20px;
   }
   .closeBtn {
     font-style: normal;
@@ -36,120 +33,48 @@ export const DivModal = styled.div`
     color: #868e96;
   }
   h1 {
-    font-family: "Inter", sans-serif;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 14px;
+    font-size: 20px;
     line-height: 24px;
-    color: #f8f9fa;
+    color: var(--color-Primary);
   }
   form {
     display: flex;
     flex-direction: column;
     width: 90%;
-    gap: 5px;
+    height:8
+    0%;
+    gap:10px;
   }
 
   label {
     font-family: "Inter", sans-serif;
     font-style: normal;
-    font-weight: 300;
-    font-size: 10px;
-    line-height: 0px;
-
-    font-family: "Inter", sans-serif;
-    font-style: normal;
     font-weight: 500;
     font-size: 16px;
     line-height: 26px;
-
-    color: #ffffff;
-    margin-top: 5px;
-    font-size: 15px;
+    color: var(--color-Primary);
   }
 
   input {
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 0px 16.2426px;
     gap: 10.15px;
-
     width: 100%;
-    height: 31.6px;
-
+    height: 37px;
     background: #343b41;
     border: 1.2182px solid #f8f9fa;
     border-radius: 4px;
-    font-family: "Inter", sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 26px;
-
     color: #ffffff;
   }
 
-  select {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 0px 16.2426px;
-    gap: 10.15px;
-
-    width: 100%;
-    height: 48px;
-
-    background: #343b41;
-
-    border: 1.2182px solid #f8f9fa;
-    border-radius: 4px;
-    font-family: "Inter", sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 26px;
-
-    color: #ffffff;
-  }
-
-  .buttonSubmit {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 0px 22.3336px;
-    cursor: pointer;
-    gap: 10.15px;
-
-    width: 100%;
-    height: 48px;
-
-    background: #ff577f;
-
-    border: 1.2182px solid #ff577f;
-    border-radius: 4.06066px;
-    margin-top: 10px;
-    font-family: "Inter", sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 26px;
-
-    color: #ffffff;
-  }
-
-  .buttonSubmit:hover {
-    background-color: #121214;
-    color: #ff577f;
-    border: #ff577f;
-    transition: 1s ease;
-  }
-
-  section {
+  div {
     display: flex;
     gap: 22px;
     margin-top: 10px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
   }
 
   .btnSave {
@@ -157,32 +82,26 @@ export const DivModal = styled.div`
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 0px 22.3336px;
-
-    width: 204px;
+    width: 50%;
     height: 48px;
     cursor: pointer;
-
     background: #59323f;
-
     border: 1.2182px solid #59323f;
     border-radius: 4px;
-
     font-family: "Inter", sans-serif;
     font-style: normal;
     font-weight: 500;
     font-size: 16px;
     line-height: 26px;
-
     color: #ffffff;
   }
+
   .btnSave:hover {
     background-color: #ff577f;
     transition: 1s ease;
   }
 
   .btnDelete {
-    position: absolute;
     bottom: 16px;
     right: 20px;
     display: flex;
@@ -211,6 +130,14 @@ export const DivModal = styled.div`
   .btnDelete:hover {
     color: #121214;
     transition: 1s ease;
+  }
+   @media (min-width: 600px) {
+    width: 90%;
+    height: 40%;
+  }
+    @media (min-width: 1000px) {
+    width: 40%;
+    height: 50%;
   }
 `;
 

@@ -1,7 +1,6 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useContact } from "../../hooks/useContact";
 import { BackGround, DivModal } from "./styles";
-import { useRef } from "react";
 import { useOutClick } from "../../hooks/useOutclick";
 import { contactSchema, TContactData } from "../../schemas";
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -19,11 +18,10 @@ export const ContactModal = () => {
     postContact(data);
   };
   const clickRef = useOutClick(() => setOpenModal(false));
-  const divRef = useRef(null);
   return (
-    <BackGround ref={clickRef}>
-      <DivModal ref={divRef}>
-        <div>
+    <BackGround >
+      <DivModal ref={clickRef}>
+        <div className="containerheaderContactModal">
           <h1>Register new contacts</h1>
           <button
             className="closeBtn"

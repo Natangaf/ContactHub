@@ -1,8 +1,8 @@
 import { Route, Routes } from "react-router-dom";
-import { Login } from "../pages/login";
 import { Dashboard } from "../pages/dashboard";
 import { Register } from "../pages/register";
 import { ProtectedRoutes } from "./ProtectedRoutes";
+import Login from './../pages/login/index';
 
 export const RoutesMain = () => {
   return (

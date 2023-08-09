@@ -1,16 +1,16 @@
 import { Dispatch, createContext, useEffect, useState } from "react";
-import { Contact } from "../components/DashBoardMain";
 import { api } from "../services/api";
 import { TContactData, TContactSchemaUpdate } from "../schemas";
 import { toast } from "react-toastify";
 import "react-toastify/ReactToastify.css";
+import { Contact } from "../pages/dashboard";
 
 interface ContactProviderProps {
   children: React.ReactNode;
 }
 
 interface ContactContextValues {
-  contacts: Contact[];
+  contacts: TContactData[];
   postContact: (data: TContactData) => Promise<void>;
   updateContact: (data: TContactSchemaUpdate) => void;
   deleteContact: () => void;
@@ -32,14 +32,16 @@ export const ContactProvider = ({ children }: ContactProviderProps) => {
 
   useEffect(() => {
     (async () => {
-      try {
-        const token = localStorage.getItem("flow:token");
-        api.defaults.headers.common.Authorization = `Bearer ${token}`;
-
-        const response = await api.get<Contact[]>("/contacts");
-        setContacts(response.data);
-      } catch (error) {
-        console.log(error);
+      const token = localStorage.getItem("hub:token");
+      if (token) {
+        try {
+          api.defaults.headers.common.Authorization = `Bearer ${token}`;
+          
+          const response = await api.get<Contact[]>("/contacts");
+          setContacts(response.data);
+        } catch (error) {
+          console.log(error);
+        }
       }
     })();
   }, []);
@@ -66,10 +68,15 @@ export const ContactProvider = ({ children }: ContactProviderProps) => {
 
   const updateContact = async (data: TContactSchemaUpdate) => {
     try {
-      const contactId = localStorage.getItem("ContactId");
-      await api.patch(`/contacts/${contactId}`, data);
-      toast.success("Sucessfully updated!");
-      reloadContacts();
+      const contactString = localStorage.getItem("Contact");
+      if (contactString) { 
+        const contactId = JSON.parse(contactString) as Contact;
+        console.log(data);
+        console.log(contactId);
+        await api.patch(`/contacts/${contactId.id}`, data);
+        toast.success("Sucessfully updated!");
+        reloadContacts();
+      }
     } catch (error: any) {
       toast.error("Empty field!");
     } finally {

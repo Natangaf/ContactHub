@@ -37,7 +37,9 @@ interface LoggedUser {
 
 const handleApiError = (error: any, messege?: string) => {
   console.log(error);
-    if (error.response?.messege && error.status != 500) {
+  console.log(error.response.status != 500);
+  console.log(error.response.messege);
+  if (error.response.status != 500) {
       toast.error(error.response?.messege || messege);
     } 
 };
@@ -51,13 +53,15 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const location = useLocation();
 
   useEffect(() => {
-    const token = localStorage.getItem("flow:token");
+    const token = localStorage.getItem("hub:token");
     (async () => {
+      
       if (!token) {
         setLoading(false);
         return;
       }
       try {
+        api.defaults.headers.common.Authorization = `Bearer ${token}`;
         const response  = await api.get("/users");
         setUser(response.data);
       } catch (error) {
@@ -76,7 +80,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
       setUser(loggedUser);
       api.defaults.headers.common.Authorization = `Bearer ${token}`;
-      localStorage.setItem("flow:token", token);
+      localStorage.setItem("hub:token", token);
 
       setLoading(false);
       const toNavigate = location.state?.from?.pathname || "/dashboard";
@@ -84,7 +88,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
       navigate(toNavigate, { replace: true });
     } catch (error) {
-      handleApiError(error, "Login failed");
+      handleApiError(error, "Email or password invalid.");
     }
   };
 

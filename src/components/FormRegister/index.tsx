@@ -54,7 +54,7 @@ const FormRegister = () => {
       <span>{errors.password?.message}</span>
       <Inputs name="Password confirmation" register={register("confirmation")} Icons={MdPassword} type="password" />
       <span>{errors.confirmation?.message}</span>
-      <StyledButtons nameButtons="buttonSend" type="submit">Sign Up</StyledButtons>
+      <StyledButtons type="submit">Sign Up</StyledButtons>
     </StyledFormRegister>
   );
 };

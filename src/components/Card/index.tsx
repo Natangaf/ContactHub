@@ -11,10 +11,12 @@ interface CardProps {
 export const Card = ({ id, name, email, phone }: CardProps) => {
   const { setOpenModalEdit } = useContact();
   const edit = () => {
-    localStorage.setItem("ContactId", id);
-    localStorage.setItem("ContactName", name);
-    localStorage.setItem("ContactEmail", email);
-    localStorage.setItem("ContactPhone", phone);
+    localStorage.setItem("Contact", JSON.stringify({
+      id: id,
+      name: name,
+      email: email,
+      phone: phone,
+    }));
     setOpenModalEdit(true);
   };
   return (
@@ -22,7 +24,6 @@ export const Card = ({ id, name, email, phone }: CardProps) => {
       <p>{name}</p>
       <p>{email}</p>
       <p>{phone}</p>
-      <p>Edit</p>
     </ContactItem>
   );
 };
