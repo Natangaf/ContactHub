@@ -4,14 +4,11 @@ import { ContactSchemaUpdate, TContactData, TContactSchemaUpdate } from "../../s
 import { useOutClick } from "../../hooks/useOutclick";
 import { useContact } from "./../../hooks/useContact";
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useRef } from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 
 
 export const ModalEdit = () => {
   const contactRef = useRef<string | null>(null)
-  const [contact, setContact] = useState<TContactData|null>()
   const { setOpenModalEdit } = useContact();
   const { deleteContact, updateContact } = useContact();
   const clickRef = useOutClick(() => setOpenModalEdit(false));
@@ -25,7 +22,6 @@ export const ModalEdit = () => {
     if (contactString !== null) {
       const parsedContact = JSON.parse(contactString) as TContactData;
       contactRef.current = contactString;
-      setContact(parsedContact);
       setValue("name", parsedContact.name || "");
       setValue("email", parsedContact.email || "");
       setValue("phone", parsedContact.phone || "");

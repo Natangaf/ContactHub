@@ -1,27 +1,36 @@
-# React + TypeScript + Vite
+# ContactHub
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+O "ContactHub" é um aplicativo web para gerenciamento de contatos.
 
-Currently, two official plugins are available:
+## Pré-requisitos
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Certifique-se de ter o Node.js instalado em seu sistema. Você pode baixá-lo em https://nodejs.org/.
 
-## Expanding the ESLint configuration
+## Configuração do Frontend
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Siga estas etapas para configurar e executar o frontend do projeto:
 
-- Configure the top-level `parserOptions` property like this:
+1. Abra o terminal e navegue até a pasta "front" no repositório do projeto.
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+2. Instale as dependências necessárias:
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+   ```bash
+   npm install
+   ```
+Se necessário, use npm install --force para garantir que todas as dependências sejam instaladas.
+
+Inicie o servidor de desenvolvimento do frontend:
+
+   ```bash
+   npm run dev
+   ```
+Isso iniciará o servidor de desenvolvimento. Mantenha o terminal aberto durante o desenvolvimento.
+
+Acesse a aplicação em http://localhost:5173/ no seu navegador.
+
+Testando as Rotas da API
+Dentro do projeto, você encontrará um arquivo chamado "Insomnia" que contém todas as rotas para testar a API. Importe este arquivo em ferramentas como o Insomnia ou o Postman para testar as funcionalidades da API.
+
+Certifique-se de manter os terminais abertos durante o uso e não feche-os para manter os servidores em execução.
+
+Agora você está pronto para começar a desenvolver e explorar o "ContactHub"!
